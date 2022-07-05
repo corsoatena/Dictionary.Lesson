@@ -8,13 +8,61 @@ namespace Dictionary.Lesson
     {
         static void Main(string[] args)
         {
-            Dictionary<string, Dictionary<StatoItaliano, string>> anagraficaCittadino = new Dictionary<string, Dictionary<StatoItaliano, string>>();
-            anagraficaCittadino.Add("FRRBRN81AZ602H", new Dictionary<StatoItaliano, string>());
-            anagraficaCittadino["FRRBRN81AZ602H"].Add(StatoItaliano.ANAGRAFE, "Residenza: Via roma 80 -  Milano 20141");
 
-            Dictionary<StatoItaliano, string> MyValues = anagraficaCittadino["FRRBRN81AZ602H"];
-            string residenza = MyValues[StatoItaliano.ANAGRAFE];
-            Console.WriteLine(residenza);
+
+            //List<string> myList = new List<string>();
+
+            //myList.Add("Bruno");
+
+            //Dictionary<string, Dictionary<string, object>> Banca = new Dictionary<string, Dictionary<string, object>>();
+
+            //Banca.Add("FRBRNR93NFN32988", new List<ContoCorrente>());
+            //Banca["FRBRNR93NFN32988"].Add(new ContoCorrente(1000));
+            //Banca["FRBRNR93NFN32988"].Add(new ContoCorrente(1001));
+            //Banca["FRBRNR93NFN32988"].Add(new ContoCorrente(1002));
+            //Banca["FRBRNR93NFN32988"].Add(new ContoCorrente(1003));
+
+
+            ///// COLLECTION 
+            ///// ARRAY, LIST , DICTIONARY 
+
+            //foreach (var conti in Banca["FRBRNR93NFN32988"])
+            //{
+            //    Console.WriteLine(conti._accountNumber);
+            //}
+
+
+            Dictionary<string, Dictionary<StatoItaliano, List<string>>> Cittadino = new Dictionary<string, Dictionary<StatoItaliano, List<string>>>();
+            Cittadino.Add("FRRBRN81AZ602H", new Dictionary<StatoItaliano,List<string>>());
+            Cittadino["FRRBRN81AZ602H"].Add(StatoItaliano.ANAGRAFE, new List<string>());
+            Cittadino["FRRBRN81AZ602H"].Add(StatoItaliano.ASL, new List<string>());
+            Cittadino["FRRBRN81AZ602H"].Add(StatoItaliano.INPS, new List<string>());
+            Cittadino["FRRBRN81AZ602H"].Add(StatoItaliano.UNIVERSITA, new List<string>());
+
+            Dictionary<StatoItaliano, List<string>> FRRBRN81AZ602H = Cittadino["FRRBRN81AZ602H"];
+            List<string> datiAnagrafe = FRRBRN81AZ602H[StatoItaliano.ANAGRAFE];
+            datiAnagrafe.Add("Residenza: Via roma 80 - Milano - 20141"); 
+            datiAnagrafe.Add("Domicilio: Via Torino 100 - Milano - 20141");
+
+
+            List<string> datiINPS = FRRBRN81AZ602H[StatoItaliano.INPS];
+            datiINPS.Add("Pesione: 800EURO"); 
+
+
+            foreach (var datoAnagrafe in FRRBRN81AZ602H[StatoItaliano.ANAGRAFE])
+            {
+                Console.WriteLine(datoAnagrafe);
+            }
+            foreach (var datoinps in FRRBRN81AZ602H[StatoItaliano.INPS])
+            {  
+                Console.WriteLine(datoinps);
+            }
+
+            if (Cittadino.ContainsKey("FRRBRN81AZ602H"))
+            {
+
+            }
+
             #region
             //   Dictionary<string, string> dizionario1 = new Dictionary<string, string>();
             //   Dictionary<int, string> dizionario2 = new Dictionary<int, string>();
@@ -62,11 +110,7 @@ namespace Dictionary.Lesson
             //} 
             #endregion
         }
-        public enum Crypto
-        {
-            BTC,
-            ETH
-        }
+
         public enum StatoItaliano
         {
             ASL,
@@ -74,5 +118,15 @@ namespace Dictionary.Lesson
             UNIVERSITA,
             ANAGRAFE
         }
+        public class ContoCorrente
+        {
+            public int _accountNumber { get; set; }
+
+            public ContoCorrente(int AccountNumber)
+            {
+                _accountNumber = AccountNumber;
+            }
         }
+
+    }
 }
